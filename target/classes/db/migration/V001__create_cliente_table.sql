@@ -1,9 +1,13 @@
 CREATE TABLE hospede (
-    id         SERIAL PRIMARY KEY,
-    nome       VARCHAR(50),
-    telefone   INTEGER,
-    cpf        VARCHAR(11)
+    id         SERIAL,
+    nome       VARCHAR(50) NOT NULL,
+    telefone   INTEGER NOT NULL,
+    cpf        VARCHAR(11) NOT NULL
 );
+
+ALTER TABLE hospede
+    ADD CONSTRAINT hospede_pk
+        PRIMARY KEY (id);
 
 COMMENT ON TABLE hospede IS 'Hospede';
 COMMENT ON COLUMN hospede.id IS 'ID do hospede';
