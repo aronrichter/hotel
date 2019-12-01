@@ -8,14 +8,14 @@ services:
     ports:
       - "15432:5432"
     volumes:
-      - $HOME/Documents/hotel/volumes:/var/lib/postgresql/data 
+      - $HOME/volumes:/var/lib/postgresql/data 
     networks:
       - postgres-network
       
   hotel-pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "aronrichter@gmail.com"
+      PGADMIN_DEFAULT_EMAIL: "hotel@hotel.com"
       PGADMIN_DEFAULT_PASSWORD: "hotel"
     ports:
       - "16543:80"
