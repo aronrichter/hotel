@@ -8,4 +8,12 @@ import java.util.List;
 public interface CheckinService {
 
     List<Checkin> findCheckinByHospede(Hospede hospede);
+
+    void beforeSave(Checkin checkin);
+
+    Double getValorEstadia(Checkin checkin);
+
+    Checkin getUltimaEstadia(Hospede hospede);
+
+    Double getValorEstadias(Hospede hospede);
 }

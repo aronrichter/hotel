@@ -10,6 +10,10 @@ ALTER TABLE tabela_preco
         PRIMARY KEY (id);
 
 ALTER TABLE tabela_preco
+    ADD CONSTRAINT tabela_preco_servico_id_uk
+        UNIQUE (servico_id, dia_semana);
+
+ALTER TABLE tabela_preco
     ADD CONSTRAINT tabela_preco_servico_id_fk
         FOREIGN KEY (servico_id) REFERENCES servico (id);
 

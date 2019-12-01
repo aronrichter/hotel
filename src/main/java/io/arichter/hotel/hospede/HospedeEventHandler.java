@@ -20,7 +20,7 @@ public class HospedeEventHandler {
     @HandleBeforeCreate
     @HandleBeforeSave
     public void beforeSave(Hospede hospede) {
-        hospedeService.checkCreate(hospede);
+        hospedeService.checkSave(hospede);
     }
 
     @HandleBeforeDelete

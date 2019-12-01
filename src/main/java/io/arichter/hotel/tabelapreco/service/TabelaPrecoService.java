@@ -9,4 +9,6 @@ public interface TabelaPrecoService {
     TabelaPreco upate(TabelaPreco tabelaPreco, Double novoValor);
 
     List<TabelaPreco> findTabelasPreco();
+
+    Double getValorDia(String diaSemana, Boolean adicionaVeiculo);
 }

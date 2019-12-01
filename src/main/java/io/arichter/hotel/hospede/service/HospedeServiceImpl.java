@@ -3,8 +3,10 @@ package io.arichter.hotel.hospede.service;
 import io.arichter.hotel.checkin.Checkin;
 import io.arichter.hotel.checkin.service.CheckinService;
 import io.arichter.hotel.hospede.Hospede;
+import io.arichter.hotel.hospede.HospedeRepository;
 import io.arichter.hotel.hospede.exception.CpfWrongSizeException;
 import io.arichter.hotel.hospede.exception.ExistsCheckinException;
+import io.arichter.hotel.hospede.exception.NomeWrongLengthException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +19,23 @@ public class HospedeServiceImpl implements HospedeService {
 
     private CheckinService checkinService;
 
-    public HospedeServiceImpl(CheckinService checkinService) {
+    private HospedeRepository hospedeRepository;
+
+    public HospedeServiceImpl(CheckinService checkinService, HospedeRepository hospedeRepository) {
         this.checkinService = checkinService;
+        this.hospedeRepository = hospedeRepository;
     }
 
     @Override
-    public void checkCreate(Hospede hospede) {
+    public void checkSave(Hospede hospede) {
         Pattern pattern = Pattern.compile(CPF_PATTERN);
 
         if (hospede.getCpf() != null && !pattern.matcher(hospede.getCpf()).matches()) {
             throw new CpfWrongSizeException();
+        }
+
+        if (hospede.getNome() != null && hospede.getNome().length() > 50) {
+            throw new NomeWrongLengthException();
         }
     }
 
@@ -34,8 +43,25 @@ public class HospedeServiceImpl implements HospedeService {
     public void checkDelete(Hospede hospede) {
         List<Checkin> checkins = checkinService.findCheckinByHospede(hospede);
 
-        if (checkins != null || !checkins.isEmpty()) {
+        if (checkins == null || !checkins.isEmpty()) {
             throw new ExistsCheckinException();
         }
+    }
+
+    @Override
+    public List<Hospede> findHospede(String nome, String cpf, Integer telefone) {
+        if (nome != null && !nome.isEmpty()) {
+            return hospedeRepository.findByNome(nome);
+        }
+
+        if (cpf != null && !cpf.isEmpty()) {
+            return hospedeRepository.findByCpf(cpf);
+        }
+
+        if (telefone != null) {
+            hospedeRepository.findByTelefone(telefone);
+        }
+
+        return hospedeRepository.findAll();
     }
 }

@@ -5,13 +5,13 @@ public enum Servicos {
     HOSPEDAGEM(1),
     VALLET(2);
 
-    private Integer servico;
+    private Integer id;
 
-    Servicos(Integer servico) {
-        this.servico = servico;
+    Servicos(Integer id) {
+        this.id = id;
     }
 
-    public Integer getServico() {
-        return servico;
+    public Integer getId() {
+        return id;
     }
 }
