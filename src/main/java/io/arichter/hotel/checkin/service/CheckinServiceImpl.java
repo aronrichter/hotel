@@ -16,6 +16,9 @@ import java.util.stream.Collectors;
 @Service
 public class CheckinServiceImpl implements CheckinService {
 
+    private static final Integer HORA_DIARIA_EXTRA = 16;
+    private static final Integer MINUTO_DIARIA_EXTRA = 30;
+
     private TabelaPrecoService tabelaPrecoService;
 
     private CheckinRepository checkinRepository;
@@ -56,7 +59,8 @@ public class CheckinServiceImpl implements CheckinService {
     }
 
     public LocalDate checkDataSaida(LocalDateTime localDateTime) {
-        if ((localDateTime.getHour() > 16) || (localDateTime.getHour() == 16 && localDateTime.getMinute() > 30)) {
+        if ((localDateTime.getHour() > HORA_DIARIA_EXTRA)
+                || (localDateTime.getHour() == HORA_DIARIA_EXTRA && localDateTime.getMinute() > MINUTO_DIARIA_EXTRA)) {
             return localDateTime.plusDays(1).toLocalDate();
         }
 
