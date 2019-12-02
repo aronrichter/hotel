@@ -8,7 +8,7 @@ import java.util.List;
 @RepositoryRestResource(path = "hospedes")
 public interface HospedeRepository extends JpaRepository<Hospede, Integer> {
 
-    List<Hospede> findByNome(String nome);
+    List<Hospede> findByNomeContainingIgnoreCase(String nome);
 
     List<Hospede> findByCpf(String cpf);
 

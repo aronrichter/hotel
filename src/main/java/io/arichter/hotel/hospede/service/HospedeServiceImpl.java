@@ -51,7 +51,7 @@ public class HospedeServiceImpl implements HospedeService {
     @Override
     public List<Hospede> findHospede(String nome, String cpf, Integer telefone) {
         if (nome != null && !nome.isEmpty()) {
-            return hospedeRepository.findByNome(nome);
+            return hospedeRepository.findByNomeContainingIgnoreCase(nome);
         }
 
         if (cpf != null && !cpf.isEmpty()) {
