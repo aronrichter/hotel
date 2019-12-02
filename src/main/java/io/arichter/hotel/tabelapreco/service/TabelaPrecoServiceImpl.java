@@ -8,9 +8,7 @@ import io.arichter.hotel.tabelapreco.TabelaPrecoRepository;
 import io.arichter.hotel.tabelapreco.exception.ValorNotValidException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TabelaPrecoServiceImpl implements TabelaPrecoService {
@@ -42,7 +40,7 @@ public class TabelaPrecoServiceImpl implements TabelaPrecoService {
 
     @Override
     public Double getValorDia(String diaSemana, Boolean adicionaVeiculo) {
-        List<Servico> servicos = new ArrayList<>();
+        List<Servico> servicos;
 
         if (adicionaVeiculo) {
             servicos = servicoService.finddByIdIn(List.of(Servicos.HOSPEDAGEM.getId(), Servicos.VALLET.getId()));
